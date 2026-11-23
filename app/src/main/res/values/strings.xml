@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">Kangbas Text to Video</string>
+    <string name="app_subtitle">AI Video Generator · Kie.ai</string>
+
+    <!-- Header -->
+    <string name="credit_unknown">Kredit: —</string>
+    <string name="credit_checking">Memeriksa…</string>
+    <string name="credit_format">Kredit: %1$s</string>
+    <string name="action_refresh">Perbarui</string>
+    <string name="action_qris">QRIS</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_create">Buat Video</string>
+    <string name="tab_photo_fx">Animasi</string>
+    <string name="tab_library">Galeri</string>
+    <string name="tab_auto_caption">Teks Otomatis</string>
+    <string name="tab_settings">Pengaturan</string>
+
+    <!-- Create Screen -->
+    <string name="create_heading">Buat Video AI</string>
+    <string name="mode_text_to_video">Text to Video</string>
+    <string name="mode_image_to_video">Image to Video</string>
+    <string name="label_select_model">Pilih Model AI</string>
+    <string name="group_economy">Hemat / Ekonomis</string>
+    <string name="group_high_quality">Kualitas tinggi</string>
+    <string name="price_estimate_unknown">Perkiraan biaya: belum tersedia</string>
+    <string name="price_detail_unavailable">Resolusi/durasi ini belum memiliki harga terverifikasi pada kartu harga Kie.ai. Pilih pengaturan lain.</string>
+    <string name="price_estimate_format">Perkiraan biaya: %1$s kredit</string>
+    <string name="label_choose_photo">Pilih Foto</string>
+    <string name="action_pick_photo">Pilih Foto dari Galeri</string>
+    <string name="action_change_photo">Ganti Foto</string>
+    <string name="action_clear_photo">Hapus Foto</string>
+    <string name="photo_upload_hint">Foto akan diunggah ke penyimpanan Kie.ai sebelum diproses. Maksimal 10 MB (JPG, PNG, WEBP).</string>
+    <string name="cd_selected_photo_preview">Pratinjau foto sumber video</string>
+    <string name="label_prompt">Deskripsi video / Prompt</string>
+    <string name="prompt_placeholder">Contoh: Seorang pria berjalan di tepi pantai saat matahari terbenam, kamera bergerak perlahan, sinematik dan realistis...</string>
+    <string name="label_ratio">Ukuran Video</string>
+    <string name="label_resolution">Resolusi</string>
+    <string name="label_duration">Durasi</string>
+    <string name="label_audio">Sertakan audio (jika didukung model)</string>
+    <string name="action_generate">BUAT VIDEO</string>
+    <string name="action_generating">MEMPROSES…</string>
+    <string name="status_ready">Siap membuat video. Masukkan API Key Kie.ai di menu Pengaturan.</string>
+    <string name="howto_heading">Cara menggunakan</string>
+    <string name="howto_body">1. Pilih Text to Video atau Image to Video.\n2. Pilih model AI dari kolom pilihan.\n3. Tulis prompt dan atur durasi / ukuran.\n4. Tekan Buat Video, tunggu proses selesai, lalu simpan hasilnya.</string>
+
+    <!-- Library Screen -->
+    <string name="library_heading">Galeri Video</string>
+    <string name="library_desc">Proses yang sedang berjalan dan riwayat video tampil di sini. Unduh video penting karena tautan hasil dari penyedia bisa kedaluwarsa.</string>
+    <string name="library_empty">Belum ada video.</string>
+    <string name="action_clear_history">Hapus Riwayat</string>
+    <string name="confirm_clear_history_title">Hapus Semua Riwayat?</string>
+    <string name="confirm_clear_history_desc">Hapus semua riwayat video dari akun ini (perangkat &amp; cloud)?</string>
+    <string name="action_download_video">Unduh Video</string>
+    <string name="action_open_video">Buka di Pemutar</string>
+    <string name="action_fullscreen">Layar Penuh</string>
+    <string name="cd_video_options">Menu opsi video</string>
+    <string name="action_reedit_video">Ulangi untuk Edit Lagi</string>
+    <string name="action_delete_video">Hapus Video</string>
+
+    <!-- Settings Screen -->
+    <string name="account_heading">Akun Gmail &amp; Memori Riwayat</string>
+    <string name="account_sync_active">Memori Cloud Aktif · Riwayat tidak hilang meski ganti akun Gmail</string>
+    <string name="action_sign_out">Keluar / Ganti Akun Gmail</string>
+    <string name="settings_api_heading">Pengaturan API Key</string>
+    <string name="settings_api_desc">Tambahkan satu atau beberapa API Key Kie.ai. Kunci yang sudah tersimpan tidak akan ditimpa. Aplikasi akan mencoba kunci berikutnya jika kunci aktif ditolak.</string>
+    <string name="settings_credit_sum_title">Total kredit dari semua API Key</string>
+    <string name="settings_credit_sum_desc">Angka kredit di bagian atas menjumlahkan seluruh saldo kredit yang berhasil diambil dari semua API Key tersimpan. Saat membuat video, aplikasi memilih salah satu kunci aktif yang saldonya mencukupi dan otomatis beralih ke kunci lain jika ditolak.</string>
+    <string name="settings_steps">1. Buka kie.ai/api-key lalu buat atau salin API Key.\n2. Tempel satu atau beberapa kunci (satu per baris), lalu tekan Tambah &amp; Simpan.</string>
+    <string name="action_open_kie_portal">Buka kie.ai/api-key</string>
+    <string name="label_api_key">API Key Kie.ai</string>
+    <string name="api_key_placeholder">Tempel API Key di sini (satu per baris)...</string>
+    <string name="action_save_key">Tambah &amp; Simpan</string>
+    <string name="action_show">Tampilkan</string>
+    <string name="action_hide">Sembunyikan</string>
+    <string name="action_check_balance">Cek Saldo</string>
+    <string name="action_delete_all">Hapus Semua</string>
+    <string name="saved_keys_heading">Daftar Kunci Tersimpan</string>
+    <string name="action_copy_all">Salin Semua</string>
+    <string name="saved_keys_empty">Belum ada kunci tersimpan.</string>
+    <string name="about_heading">Tentang Aplikasi</string>
+    <string name="about_desc">Kangbas Text to Video menggunakan API Kie.ai. Kredit terpakai mengikuti model, durasi, dan resolusi. Total kredit yang ditampilkan merupakan gabungan saldo dari seluruh API Key yang Anda simpan. API Key bersifat pribadi; jangan bagikan kepada orang lain.</string>
+    <string name="app_version_footer">Kangbas Text to Video · Versi 1.0</string>
+    <string name="confirm_delete_keys_title">Hapus Semua API Key?</string>
+    <string name="confirm_delete_keys_desc">Hapus semua API Key dari perangkat ini?</string>
+
+    <!-- QRIS & Notice Modals -->
+    <string name="qris_title">Dukung Kangbas Text to Video</string>
+    <string name="qris_desc">Scan QRIS ShopeePay berikut untuk dukungan pengembangan aplikasi.</string>
+    <string name="cd_qris_image">Kode QRIS ShopeePay untuk dukungan aplikasi</string>
+    <string name="action_continue">LANJUTKAN</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_delete">Hapus</string>
+    <string name="action_later">Nanti</string>
+    <string name="action_use">Gunakan</string>
+    <string name="status_active">Aktif</string>
+    <string name="action_close">Tutup</string>
+
+    <!-- Photo Effects & Animasi Screen -->
+    <string name="animasi_mode_photo">Animasi Foto</string>
+    <string name="animasi_mode_caption">Teks Otomatis</string>
+    <string name="photo_fx_heading">Animasi Foto (0 Kredit)</string>
+    <string name="photo_fx_desc">Tambahkan karakter &amp; hiasan bergerak (merpati putih, burung, not doremi, koi, kunang-kunang, sakura, dll) + teks manual banyak font tanpa mengubah wajah atau tulisan asli.</string>
+    <string name="action_pick_audio">Pilih Musik / Audio (Opsional)</string>
+    <string name="action_match_video_duration">Samakan Durasi dari Video Lain</string>
+    <string name="action_generate_anim">BUAT VIDEO ANIMASI (0 KREDIT)</string>
+
+    <!-- Auto Caption Screen -->
+    <string name="auto_caption_heading">Teks Otomatis Video</string>
+    <string name="auto_caption_desc">Pilih video, biarkan AI mendeteksi suara audio menjadi subtitle otomatis dengan berbagai bentuk teks keren, lalu simpan dan unduh hasilnya.</string>
+    <string name="action_pick_video">Pilih Video dari Perangkat</string>
+    <string name="action_generate_captions">Buat Teks Otomatis (AI)</string>
+    <string name="label_subtitle_styles">Pilihan Bentuk Teks</string>
+    <string name="action_burn_captions">PROSES &amp; BUAT VIDEO BERTEKS</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_title">Simpan Riwayat dengan Gmail</string>
+    <string name="auth_desc">Masuk dengan akun Google agar semua histori video, animasi, dan pengeditan tersimpan otomatis. Meski keluar atau ganti ke Gmail lain lalu kembali lagi, histori Anda tetap utuh.</string>
+    <string name="action_google_sign_in">Masuk dengan Google</string>
+    <string name="auth_signing_in">Menghubungkan akun Google…</string>
+</resources>

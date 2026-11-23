@@ -1,0 +1,8 @@
+{
+  "name": "Remix Apk Maker",
+  "description": "Effortlessly convert your files and projects into functional Android applications with this simple, intuitive tool.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

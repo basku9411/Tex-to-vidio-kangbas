@@ -1,0 +1,12 @@
+{
+  "firestore": {
+    "database": "ai-studio-android-remixapk-e58f190d-bc71-404a-99cc-c1a3dbe227d9",
+    "rules": "firestore.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "host": "127.0.0.1",
+      "port": 8085
+    }
+  }
+}

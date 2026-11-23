@@ -1,0 +1,137 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user account metadata keyed by Firebase Auth UID",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID matching the document ID"
+        },
+        "email": {
+          "type": "string",
+          "description": "Google account email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Google account display name"
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "Optional Google profile photo URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when user profile was first created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of latest login or update"
+        }
+      },
+      "required": ["uid", "email", "displayName", "createdAt", "updatedAt"]
+    },
+    "VideoHistoryRecord": {
+      "title": "VideoHistoryRecord",
+      "description": "Per-user persistent video creation, animation, and auto-caption history record",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Video prompt or animation title"
+        },
+        "modelLabel": {
+          "type": "string",
+          "description": "AI model or studio mode summary"
+        },
+        "mode": {
+          "type": "string",
+          "description": "Creation mode (text, image, or caption)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Video processing status (queued, processing, completed, failed)"
+        },
+        "progressText": {
+          "type": "string",
+          "description": "Human-readable progress label"
+        },
+        "thumbPath": {
+          "type": "string",
+          "description": "Optional device-local thumbnail path"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "Optional remote Kie.ai task identifier"
+        },
+        "videoUrl": {
+          "type": "string",
+          "description": "Optional remote download URL or local file URI"
+        },
+        "error": {
+          "type": "string",
+          "description": "Optional failure description"
+        },
+        "createdAtMs": {
+          "type": "integer",
+          "description": "Client creation epoch milliseconds for chronological sorting"
+        },
+        "completedAtMs": {
+          "type": "integer",
+          "description": "Optional completion epoch milliseconds"
+        },
+        "estimatedCredits": {
+          "type": "integer",
+          "description": "Estimated credit cost (0 for on-device studio renders)"
+        },
+        "draftJson": {
+          "type": "string",
+          "description": "Optional JSON payload preserving editable parameters across sessions"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "modelLabel",
+        "mode",
+        "status",
+        "progressText",
+        "createdAtMs",
+        "estimatedCredits",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profile root document owned strictly by userId"
+    },
+    "/users/{userId}/videoHistory/{historyId}": {
+      "schema": {
+        "$ref": "#/entities/VideoHistoryRecord"
+      },
+      "description": "Per-user video generation, photo animation, and auto-caption history"
+    }
+  }
+}

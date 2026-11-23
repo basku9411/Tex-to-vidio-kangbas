@@ -1,0 +1,188 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Default deny all unmatched paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 2. Shared helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string
+        && id.size() >= 1
+        && id.size() <= 128
+        && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isOptionalString(field, maxLen) {
+      return !(field in incoming())
+        || (incoming()[field] is string && incoming()[field].size() <= maxLen);
+    }
+
+    function isOptionalInt(field, minVal, maxVal) {
+      return !(field in incoming())
+        || (incoming()[field] is int && incoming()[field] >= minVal && incoming()[field] <= maxVal);
+    }
+
+    // 3. Domain validators
+    function isValidUserProfileFields(userId) {
+      return incoming().keys().hasAll([
+          'uid',
+          'email',
+          'displayName',
+          'createdAt',
+          'updatedAt'
+        ])
+        && incoming().keys().hasOnly([
+          'uid',
+          'email',
+          'displayName',
+          'photoUrl',
+          'createdAt',
+          'updatedAt'
+        ])
+        && incoming().uid is string
+        && incoming().uid == userId
+        && incoming().email is string
+        && incoming().email.size() <= 320
+        && incoming().displayName is string
+        && incoming().displayName.size() <= 120
+        && isOptionalString('photoUrl', 1024)
+        && incoming().createdAt is timestamp
+        && incoming().createdAt <= request.time
+        && incoming().updatedAt is timestamp
+        && incoming().updatedAt <= request.time;
+    }
+
+    function isValidVideoHistoryFields(userId) {
+      return incoming().keys().hasAll([
+          'userId',
+          'title',
+          'modelLabel',
+          'mode',
+          'status',
+          'progressText',
+          'createdAtMs',
+          'estimatedCredits',
+          'createdAt',
+          'updatedAt'
+        ])
+        && incoming().keys().hasOnly([
+          'userId',
+          'title',
+          'modelLabel',
+          'mode',
+          'status',
+          'progressText',
+          'thumbPath',
+          'taskId',
+          'videoUrl',
+          'error',
+          'createdAtMs',
+          'completedAtMs',
+          'estimatedCredits',
+          'draftJson',
+          'createdAt',
+          'updatedAt'
+        ])
+        && incoming().userId is string
+        && incoming().userId == userId
+        && incoming().title is string
+        && incoming().title.size() <= 200
+        && incoming().modelLabel is string
+        && incoming().modelLabel.size() <= 200
+        && incoming().mode is string
+        && incoming().mode in ['text', 'image', 'caption']
+        && incoming().status is string
+        && incoming().status in ['queued', 'processing', 'completed', 'failed']
+        && incoming().progressText is string
+        && incoming().progressText.size() <= 200
+        && incoming().createdAtMs is int
+        && incoming().createdAtMs >= 0
+        && incoming().estimatedCredits is int
+        && incoming().estimatedCredits >= 0
+        && incoming().estimatedCredits <= 100000
+        && isOptionalString('thumbPath', 1024)
+        && isOptionalString('taskId', 256)
+        && isOptionalString('videoUrl', 2048)
+        && isOptionalString('error', 1000)
+        && isOptionalInt('completedAtMs', 0, 9999999999999)
+        && isOptionalString('draftJson', 32000)
+        && incoming().createdAt is timestamp
+        && incoming().createdAt <= request.time
+        && incoming().updatedAt is timestamp
+        && incoming().updatedAt <= request.time;
+    }
+
+    // 4. Collection rules
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId)
+        && isValidId(userId)
+        && isValidUserProfileFields(userId)
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow update: if isOwner(userId)
+        && isValidUserProfileFields(userId)
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'email',
+          'displayName',
+          'photoUrl',
+          'updatedAt'
+        ])
+        && incoming().uid == existing().uid
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time;
+      allow delete: if false;
+
+      match /videoHistory/{historyId} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && isValidId(historyId)
+          && isValidVideoHistoryFields(userId)
+          && incoming().createdAt == request.time
+          && incoming().updatedAt == request.time;
+        allow update: if isOwner(userId)
+          && isValidVideoHistoryFields(userId)
+          && incoming().diff(existing()).affectedKeys().hasOnly([
+            'title',
+            'modelLabel',
+            'mode',
+            'status',
+            'progressText',
+            'thumbPath',
+            'taskId',
+            'videoUrl',
+            'error',
+            'completedAtMs',
+            'estimatedCredits',
+            'draftJson',
+            'updatedAt'
+          ])
+          && incoming().userId == existing().userId
+          && incoming().createdAt == existing().createdAt
+          && incoming().createdAtMs == existing().createdAtMs
+          && incoming().updatedAt == request.time;
+        allow delete: if isOwner(userId);
+      }
+    }
+  }
+}
